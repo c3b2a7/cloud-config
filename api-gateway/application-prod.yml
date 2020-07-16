@@ -1,0 +1,35 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://lovebirdy:8000/eureka/
+server:
+  port: 8080
+spring:
+  application:
+    name: api-gateway
+zuul:
+  add-host-header: true
+  decode-url: false
+  ignored-services: 'api-gateway'
+  retryable: true
+#  routes:
+#    feign-consumer: /feign-consumer/**
+#    cloud-web: /cloud-web/**
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,routes,filters,refresh
+ribbon:
+  ReadTimeout: 2500
+  ConnectTimeout: 500
+  MaxAutoRetriesNextServer: 0
+  MaxAutoRetries: 0
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+from: api-gateway-prod
